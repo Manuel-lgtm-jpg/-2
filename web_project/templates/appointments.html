@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>预约列表 - 在线问诊预约系统</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="hero">
+            <h1>📋 预约列表</h1>
+            <p class="subtitle">当前共 {{ appointments|length }} 条预约记录</p>
+        </header>
+
+        <div class="card">
+            {% if appointments %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>姓名</th>
+                        <th>手机号</th>
+                        <th>科室</th>
+                        <th>医生</th>
+                        <th>日期</th>
+                        <th>时间段</th>
+                        <th>症状</th>
+                        <th>提交时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for a in appointments %}
+                    <tr>
+                        <td>{{ a[0] }}</td>
+                        <td>{{ a[1] }}</td>
+                        <td>{{ a[2] }}</td>
+                        <td>{{ a[3] }}</td>
+                        <td>{{ a[4] or '—' }}</td>
+                        <td>{{ a[5] }}</td>
+                        <td>{{ a[6] }}</td>
+                        <td>{{ a[7] or '—' }}</td>
+                        <td>{{ a[8] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p class="empty">暂无预约记录，<a href="/">去预约 →</a></p>
+            {% endif %}
+            <a href="/" class="link">← 返回预约</a>
+        </div>
+    </div>
+</body>
+</html>
